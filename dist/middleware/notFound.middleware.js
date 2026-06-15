@@ -1,0 +1,6 @@
+import { StatusCodes } from 'http-status-codes';
+import { sendError } from '../utils/response.js';
+export function notFoundHandler(req, res) {
+    return sendError(res, StatusCodes.NOT_FOUND, `Route not found: ${req.method} ${req.originalUrl}`);
+}
+//# sourceMappingURL=notFound.middleware.js.map
