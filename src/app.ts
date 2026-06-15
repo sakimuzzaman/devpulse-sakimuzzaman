@@ -1,5 +1,8 @@
 import express, { Application } from 'express';
-
+import authRoutes from './modules/auth/auth.routes.js';
+import issuesRoutes from './modules/issues/issues.routes.js';
+import { errorHandler } from './middleware/error.middleware.js';
+import { notFoundHandler } from './middleware/notFound.middleware.js';
 
 const app: Application = express();
 
@@ -16,6 +19,14 @@ app.get('/health', (_req, res) => {
   });
 });
 
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/issues', issuesRoutes);
 
+// Handle undefined routes
+app.use(notFoundHandler);
+
+// Global error handler
+app.use(errorHandler);
 
 export default app;
